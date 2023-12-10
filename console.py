@@ -5,6 +5,7 @@ import re
 from models import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """Defines the HBNBcommmand interpreter.
 
@@ -15,13 +16,13 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb)"
     __classes = {
             "BaseModel"
-   }
+       }
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
         pass
 
-    def do_quit(self,arg):
+    def do_quit(self, arg):
         """Quit command to exit the program."""
         return True
 
@@ -29,8 +30,8 @@ class HBNBCommand(cmd.Cmd):
         """End of File signal to exit the program."""
         print("")
         return True
-    
-    def do_create(self,arg):
+
+    def do_create(self, arg):
         """Used to create <class>
         Create a new class instance and print its id.
         """
@@ -43,6 +44,6 @@ class HBNBCommand(cmd.Cmd):
             print(eval(arg1[0])().id)
             storage.save()
 
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
-
