@@ -287,12 +287,6 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("Review.show()"))
             self.assertEqual(correct, output.getvalue().strip())
 
-    def test_update_missing_id_dot_notation(self):
-        correct = "** update NonExistentClass **"
-        with patch('sys.stdout', new=StringIO) as output:
-            self.console.onecmd(command)
-            self.assertEqual("** class doesn't exist **", output.getvalue().strip())
-
     def test_show_no_instance_found_space_notation(self):
         correct = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
