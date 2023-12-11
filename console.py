@@ -2,6 +2,7 @@
 """This defines the HBnB console."""
 import cmd
 import re
+import json
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
@@ -129,6 +130,28 @@ class HBNBCommand(cmd.Cmd):
         else:
             del objdict["{}.{}".format(argl[0], argl[1])]
             storage.save()
+    
+    def update_dict(self, classname, uid, s_dict):
+        """Helper method for update() with a dictionary."""
+        s = s_dict.replace("'", '"')
+        d = json.loads(s)
+        if not classname:
+            print("** class name missing **")
+        elif classname not in storage.classes():
+            print("** class doesn't exist **")
+        elif uid is None:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(classname, uid)
+            if key not in storage.all():
+                print("** no instance found **")
+            else:
+                attributes = storage.attributes()[classname]
+                for attribute, value in d.items():
+                    if attribute in attributes:
+                        value = attributes[attribute](value)
+                    setattr(storage.all()[key], attribute, value)
+                storage.all()[key].save()
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
