@@ -649,7 +649,7 @@ class TestHBNBCommand_destroy(unittest.TestCase):
 
     def test_destroy_objects_dot_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+            self.assertFalse(HBNBCommand().onecmd("destroy BaseModel"))
             testID = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             obj = storage.all()["BaseModel.{}".format(testID)]
