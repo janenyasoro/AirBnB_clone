@@ -130,7 +130,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             del objdict["{}.{}".format(argl[0], argl[1])]
             storage.save()
-    
+
     def update_dict(self, classname, uid, s_dict):
         """Helper method for update() with a dictionary."""
         s = s_dict.replace("'", '"')
@@ -164,6 +164,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 new_list = [str(obj) for key, obj in storage.all().items()]
                 print(new_list)
+
     def do_count(self, line):
         """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class."""
@@ -172,16 +173,16 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif words[0] not in storage.classes():
             print("** class doesn't exist **")
-        else: 
+        else:
             matches = [
                 k for k in storage.all() if k.startswith(
                      words[0] + '.')]
                 print(len(matches))
 
     def do_update(self, line):
-         """Updates an instance by adding or updating attribute.
-        """
-        if line == "" or line is None:
+    """Updates an instance by adding or updating attribute.
+         """
+         if line == "" or line is None:
             print("** class name missing **")
             return
 
